@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { AppContextProvider } from "./context/AppContext";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import WeatherOverview from "./pages/WeatherOverview";
+import WeatherDetail from "./pages/WeatherDetail";
+import ScrollToTop from "./ScrollToTop";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
-function App() {
+import "./App.css";
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main>
+      <AppContextProvider>
+        <BrowserRouter>
+          <ScrollToTop>
+            <Header />
+            <Routes>
+              <Route path="/" element={<WeatherOverview />} />
+              <Route path="/detail/:dayDate" element={<WeatherDetail />} />
+            </Routes>
+            <Footer />
+          </ScrollToTop>
+        </BrowserRouter>
+      </AppContextProvider>
+    </main>
   );
-}
+};
 
 export default App;
