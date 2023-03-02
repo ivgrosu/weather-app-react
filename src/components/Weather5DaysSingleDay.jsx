@@ -7,7 +7,7 @@ const Weather5DaysSingleDay = ({ item }) => {
   const { getDate } = useContext(AppContext);
   const navigate = useNavigate();
 
-  const getTempMax = (item) => {
+  const getTempMax = (item) => { 
     const tempMaxList = [];
     item.timeList.forEach((i) => {
       tempMaxList.push(i.tempMax);

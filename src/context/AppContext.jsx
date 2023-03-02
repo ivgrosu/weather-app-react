@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-import weatherAPI from "../apis/openWeatherAPI";
+import weatherAPI from "../utils/apis/openWeatherAPI";
 export const AppContext = createContext();
 
 export const AppContextProvider = ({ children }) => {
@@ -48,18 +48,21 @@ export const AppContextProvider = ({ children }) => {
             pressure: item.main.pressure,
           };
         });
+
         const data = {
           name: response.data.city.name,
           country: response.data.city.country,
           id: response.data.city.id,
           timeList,
         };
-        const dataPerDay = [];
-        const dayTime = (index = 21) => {
+
+        let dataPerDay = [];
+        const dayTime = (index = 23) => {
           const time = data.timeList.findIndex((item) => item.time === index);
           const day = { ...data, timeList: timeList.splice(0, time + 1) };
-          dataPerDay.push(day);
+          dataPerDay = [...dataPerDay, day];
         };
+
         for (let i = 0; i < 5; i++) {
           dayTime();
         }
